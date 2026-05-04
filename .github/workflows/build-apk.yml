@@ -32,7 +32,8 @@ jobs:
           cp -r assets temp_project/
           cp pubspec.yaml temp_project/
           cp android/app/google-services.json temp_project/android/app/
-          sed -i 's/kotlin("android") version "[^"]*"/kotlin("android") version "1.9.22"/' temp_project/android/settings.gradle
+          cp android/build.gradle temp_project/android/
+          cp android/app/build.gradle temp_project/android/app/
 
       - name: Get dependencies
         run: |
