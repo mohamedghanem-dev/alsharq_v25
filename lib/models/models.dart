@@ -33,12 +33,28 @@ class Review {
 }
 
 class RestaurantOrder {
-  final String id, status;
+  final String id;
+  final String status;
   final double total;
   final dynamic items;
-  final String? customerName, address, phone, paymentMethod;
+  final String? customerName;
+  final String? address;
+  final String? phone;
+  final String? paymentMethod;
   final DateTime? createdAt;
-  Order({required this.id, required this.status, required this.total,
-    required this.items, this.customerName, this.address, this.phone,
-    this.paymentMethod, this.createdAt});
+
+  RestaurantOrder({
+    required this.id,
+    required this.status,
+    required this.total,
+    required this.items,
+    this.customerName,
+    this.address,
+    this.phone,
+    this.paymentMethod,
+    this.createdAt,
+  });
 }
+
+// Backward compatibility alias
+typedef Order = RestaurantOrder;
