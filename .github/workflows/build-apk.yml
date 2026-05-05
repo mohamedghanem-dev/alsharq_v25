@@ -32,6 +32,7 @@ jobs:
           cp -r assets alsharq_build/
           cp pubspec.yaml alsharq_build/
           cp android/app/google-services.json alsharq_build/android/app/
+          cp android/app/build.gradle alsharq_build/android/app/
           find alsharq_build/android -name "settings.gradle*" -exec sed -i 's/kotlin("android") version "[^"]*"/kotlin("android") version "1.9.22"/' {} \;
 
       - name: Get dependencies
