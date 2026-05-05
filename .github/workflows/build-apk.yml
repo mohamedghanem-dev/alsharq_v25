@@ -22,7 +22,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.32.0"
+          flutter-version: '3.32.0'
           channel: 'stable'
 
       - name: Create fresh project and copy source
@@ -32,9 +32,7 @@ jobs:
           cp -r assets alsharq_build/
           cp pubspec.yaml alsharq_build/
           cp android/app/google-services.json alsharq_build/android/app/
-          cd alsharq_build/android
-          sed -i "s/kotlin(\"android\") version \"[^\"]*\"/kotlin(\"android\") version \"1.9.22\"/" settings.gradle
-          echo "compileSdkVersion=35" >> local.properties
+          sed -i 's/kotlin("android") version "[^"]*"/kotlin("android") version "1.9.22"/' alsharq_build/android/settings.gradle
 
       - name: Get dependencies
         run: |
