@@ -17,16 +17,8 @@ jobs:
           flutter-version: '3.24.0'
           channel: stable
           cache: true
-      - name: Flutter pub get
-        run: flutter pub get
-      - name: Create android
-        run: flutter create --platforms android .
-      - name: Write local.properties
-        run: |
-          echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
-          echo "sdk.dir=$ANDROID_SDK_ROOT" >> android/local.properties
-      - name: Build APK
-        run: flutter build apk --release --no-tree-shake-icons
+      - run: flutter pub get
+      - run: flutter build apk --release --no-tree-shake-icons
       - uses: actions/upload-artifact@v4
         with:
           name: alsharq-apk
