@@ -25,9 +25,6 @@ jobs:
         run: |
           echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
           echo "sdk.dir=$ANDROID_SDK_ROOT" >> android/local.properties
-      - name: Fix google-services
-        run: |
-          cp android/app/google-services.json android/app/google-services.json 2>/dev/null || echo "no google-services"
       - name: Build APK
         run: flutter build apk --release --no-tree-shake-icons
       - uses: actions/upload-artifact@v4
