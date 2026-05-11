@@ -21,18 +21,19 @@ jobs:
         run: flutter pub get
       - name: Create android
         run: flutter create --platforms android --org com.alsharq --project-name app .
-      - name: Fix Kotlin, Firebase and minSdk
+      - name: Fix settings.gradle
         run: |
           sed -i "s/org.jetbrains.kotlin.android\" version \".*\"/org.jetbrains.kotlin.android\" version \"1.9.22\"/" android/settings.gradle
-          sed -i "s/minSdk = flutter.minSdkVersion/minSdk = 23/" android/app/build.gradle
           sed -i "/id \"org.jetbrains.kotlin.android\"/a\    id \"com.google.gms.google-services\" version \"4.4.0\" apply false" android/settings.gradle
-          sed -i "s/minSdk = flutter.minSdkVersion/minSdk = 23/" android/app/build.gradle
+      - name: Fix app/build.gradle
+        run: |
+          sed -i '/id "com.android.application"/a\    id "com.google.gms.google-services"' android/app/build.gradle
+          sed -i 's/minSdk = flutter.minSdkVersion/minSdk = 23/' android/app/build.gradle
+          sed -i 's/compileSdk = flutter.compileSdkVersion/compileSdk = 35/' android/app/build.gradle
       - name: Add google-services
         env:
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: echo "$GOOGLE_SERVICES_JSON" > android/app/google-services.json
-      - name: Add google-services plugin to app
-        run: sed -i '/id "com.android.application"/a\    id "com.google.gms.google-services"' android/app/build.gradle
       - name: Write local.properties
         run: |
           echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
